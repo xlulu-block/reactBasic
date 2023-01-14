@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX创建</title>
+</head>
+<body>
+    <div id="test"></div>
+    <!-- 引入react核心包 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react处理dom文件 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 这里表示里面写的是需要Babel去处理的代码 -->
+    <script type="text/babel">
+        // 创建虚拟dom
+        const VDom=<h1>Hello world</h1>
+        // 真实dom
+        const TDom=document.getElementById('test')
+        console.log('虚拟DOM',VDom)
+        console.log('真实DOM',TDom)
+
+    </script>
+</body>
+</html>
