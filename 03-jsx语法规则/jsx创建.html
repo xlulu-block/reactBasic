@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX创建</title>
+    <style>
+        .nameColor{
+            color:aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <!-- 引入react核心包 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react处理dom文件 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 这里表示里面写的是需要Babel去处理的代码 -->
+    <script type="text/babel">
+        const name = 'su'
+        // 创建虚拟dom
+        const VDom =
+            <div style={{backgroundColor:'skyblue'}}>
+                <h1 className='nameColor'>{name}</h1>
+            </div>
+        /**
+         * jsx语法规则，标签中混入js语法需要用{}
+         * 类名要用className，不然会和es6的类class冲突
+         直接书写样式需要{{key:value}}
+         只能有一个根标签
+         */
+        // 将虚拟dom渲染到页面中，dom/容器
+        ReactDOM.render(VDom, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
