@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>props</title>
+    <style>
+        .nameColor {
+            color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <!-- 引入react核心包 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react处理dom文件 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 这里表示里面写的是需要Babel去处理的代码 -->
+    <script type="text/babel">
+        class List extends React.Component{
+           
+            render(){
+                return (<div>
+06-组件实例的三大属性state copy                        <ul>
+                           <li>{this.props.name}</li>
+                           <li>{this.props.age}</li>
+                           <li>{this.props.sex}</li>
+                        </ul>
+                       
+                    </div>)
+            }
+        }
+        ReactDOM.render(<List name='小明' age='12' sex='男'/>, document.getElementById('test'))
+    </script>
+</body>
+
+</html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>props</title>
+    <title>JSX创建</title>
     <style>
         .nameColor {
             color: aquamarine;
@@ -23,20 +23,13 @@
     <script src="../js/babel.min.js"></script>
     <!-- 这里表示里面写的是需要Babel去处理的代码 -->
     <script type="text/babel">
-        class List extends React.Component{
-           
-            render(){
-                return (<div>
-                        <ul>
-                           <li>{this.props.name}</li>
-                           <li>{this.props.age}</li>
-                           <li>{this.props.sex}</li>
-                        </ul>
-                       
-                    </div>)
+        // 定义类式组件
+        class RefComponent extends React.Component {
+            render() {
+                return (<div>111</div>)
             }
         }
-        ReactDOM.render(<List name='小明' age='12' sex='男'/>, document.getElementById('test'))
+        ReactDOM.render(<RefComponent />, document.getElementById('test'))
     </script>
 </body>
 
