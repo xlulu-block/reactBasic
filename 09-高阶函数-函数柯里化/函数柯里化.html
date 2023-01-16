@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+    <style>
+        .nameColor{
+            color:aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <!-- 引入react核心包 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react处理dom文件 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 这里表示里面写的是需要Babel去处理的代码 -->
+    <script type="text/babel">
+        class MyForm extends React.Component{
+            /*高阶函数
+            1.A接收的一个参数是函数
+            2.A返回值是一个函数
+            满足任意一个条件即为高阶函数
+            常用的高阶函数：Promise，setTimeout，arr.map
+            */
+                state={
+                    name:'',
+                    password:''
+                }
+                saveData(dataType){
+                return (event)=>{
+                    this.setState({[dataType]:event.target.value})
+                }
+            }
+            render(){
+                return (
+                    <form action='http://www.baidu.com' onSubmit={this.handleSubmit}>
+                        用户名<input type="name" name='name' onChange={this.saveData('name')}/>    
+                        密码<input type="password"  name='password' onChange={this.saveData('password')}/>    
+                    </form>
+                )
+            }
+        }
+        ReactDOM.render(<MyForm/>, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
