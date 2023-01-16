@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX创建</title>
+    <style>
+        .nameColor{
+            color:aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <!-- 引入react核心包 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react处理dom文件 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 这里表示里面写的是需要Babel去处理的代码 -->
+    <script type="text/babel">
+        // 定义类式组件
+        class MyComponent extends React.Component{
+            render(){
+                return <h1>这是类式组件</h1>
+            }
+        }
+        /**
+         * react去调用的时候会自动new一个实例出来
+         * 调用render函数将返回虚拟DOM转为真实DOM
+         * */
+        
+        ReactDOM.render(<MyComponent/>, document.getElementById('test'))
+    </script>
+</body>
+
+</html>

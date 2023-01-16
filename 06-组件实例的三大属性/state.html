@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX创建</title>
+    <style>
+        .nameColor {
+            color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <!-- 引入react核心包 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react处理dom文件 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 这里表示里面写的是需要Babel去处理的代码 -->
+    <script type="text/babel">
+        // 定义类式组件
+        class Weather extends React.Component {
+            constructor(props) {
+                super(props)
+                this.state = {
+                    isHot: true,
+                    wind:'微风'
+                }
+                this.ChangeWeather=this.ChangeWeather.bind(this)
+            }
+            render() {
+                const { isHot,wind } = this.state
+                return (<div><h1 onClick={this.ChangeWeather}>今天天气很{isHot ? '炎热' : '凉爽'},{wind}</h1></div>)
+            }
+            // changeWeather放在weather的原型对象上，供实例使用
+            // 通过weather调用方法时，方法中的this就指向weather
+            ChangeWeather(){
+                // ChangeWeather是作为onclick的回调，不是通过实例调用，是直接调用
+                // 类中自动开启局部严格模式，所以onclick调用的时候 this指向undefined
+                const {isHot}=this.state
+                // 正确写法，借助api
+                this.setState({isHot:!isHot})
+
+                // 严重注意，状态state不可直接更改，需要借助api进行修改，下面这行是错误的写法
+                // this.state.isHot=!isHot  //错误写法
+
+                console.log(this);
+            }
+        }
+        /**
+         * react去调用的时候会自动new一个实例出来
+         * 调用render函数将返回虚拟DOM转为真实DOM
+         * */
+
+        ReactDOM.render(<Weather />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>

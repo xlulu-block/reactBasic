@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>props</title>
+    <style>
+        .nameColor {
+            color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <!-- 引入react核心包 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react处理dom文件 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 引入prop-type，限制组件标签的类型 -->
+    <script src="../js/prop-types.js"></script>
+    <!-- 这里表示里面写的是需要Babel去处理的代码 -->
+    <script type="text/babel">
+        class Person extends React.Component{
+            render(){
+                const {name,age,sex,speak}=this.props
+                return (<div>
+                        <ul onClick={speak}>
+                            <li>{name}</li>
+                           <li>{age}</li>
+                           <li>{sex}</li>
+                        </ul>
+                       
+                    </div>)
+            }
+        }
+        // 限制类型
+        Person.propTypes={
+            name:PropTypes.string.isRequired,//字符串且必传
+            age:PropTypes.number,
+            sex:PropTypes.string,
+            speak:PropTypes.func
+        }
+        // props的默认值
+        Person.defaultProps={
+            sex:'男',
+            age:10,
+            speak:()=>{
+                console.log(this)
+            }
+        }
+        const person={
+            name:'小明',
+        }
+        ReactDOM.render(<Person {...person} />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>

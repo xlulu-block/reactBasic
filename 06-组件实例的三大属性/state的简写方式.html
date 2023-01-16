@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX创建</title>
+    <style>
+        .nameColor {
+            color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <!-- 引入react核心包 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react处理dom文件 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 这里表示里面写的是需要Babel去处理的代码 -->
+    <script type="text/babel">
+        // 定义类式组件
+        class Weather extends React.Component {
+            state={
+                isHot:true
+            }
+            render() {
+                const { isHot,wind } = this.state
+                return (<div><h1 onClick={this.ChangeWeather}>今天天气很{isHot ? '炎热' : '凉爽'},{wind}</h1></div>)
+            }
+            // 自定义的方法需要赋值语句加箭头函数的写法
+            ChangeWeather=()=>{
+                const {isHot}=this.state
+                this.setState({isHot:!isHot})
+            }
+        }
+        ReactDOM.render(<Weather />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
