@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSX创建</title>
+    <title>字符串形式的ref.</title>
     <style>
         .nameColor {
             color: aquamarine;
@@ -25,9 +25,25 @@
     <script type="text/babel">
         // 定义类式组件
         class RefComponent extends React.Component {
-            render() {
-                return (<div>111</div>)
+            state={
+                
             }
+            // 展示数据
+            showData=()=>{
+                console.log(this.refs.input1.value)
+            }
+            // 失去焦点
+            showData2=()=>{
+                console.log(this.refs.input2.value)
+            }
+            render() {
+                return (<div>
+                            <input type="text" placeholder='点击按钮显示数据'  ref='input1'/>
+                            <button onClick={this.showData}>显示输入数据</button>
+                            <input onBlur={this.showData2} type="text" placeholder='失去焦点显示数据' ref='input2' />
+                        </div>)
+            }
+          
         }
         ReactDOM.render(<RefComponent />, document.getElementById('test'))
     </script>
