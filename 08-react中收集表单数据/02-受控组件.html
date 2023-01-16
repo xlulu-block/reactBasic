@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+    <style>
+        .nameColor{
+            color:aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <!-- 引入react核心包 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react处理dom文件 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 这里表示里面写的是需要Babel去处理的代码 -->
+    <script type="text/babel">
+        class MyForm extends React.Component{
+            // 受控组件，可以理解为vue的数据双向绑定，先把数据存起来，后面再用
+                state={
+                    name:'',
+                    password:''
+                }
+            handleSubmit=(event)=>{
+                event.preventDefault()//阻止表单提交
+                const {input1,input2}=this
+                alert(`用户名${input1.value},密码${input2.value}`)
+            }
+            saveName(event){
+                this.setState({name:event.target.value})
+            }
+            savePassword(e){
+                this.setState({password:e.target.value})
+            }
+            render(){
+                return (
+                    <form action='http://www.baidu.com' onSubmit={this.handleSubmit}>
+                        用户名<input type="name" name='name' onChange={this.saveName}/>    
+                        密码<input type="password"  name='password' onChange={this.savePassword}/>    
+                        <button onClick={this.test} >登录</button>
+                        <button onClick={this.test2} type='button'>登录</button>   {/*不写type默认会调用表单提交的方法，那这里就会调用两个函数*/}
+                      
+                    </form>
+                )
+            }
+        }
+        ReactDOM.render(<MyForm/>, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
