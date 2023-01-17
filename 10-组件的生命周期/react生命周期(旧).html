@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React生命周期</title>
+    <style>
+        .nameColor {
+            color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <!-- 引入react核心包 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react处理dom文件 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 这里表示里面写的是需要Babel去处理的代码 -->
+    <script type="text/babel">
+      
+        // 定义类式组件
+         class Count extends React.Component {
+            // 构造器
+            constructor(props){
+                console.log('constructor');
+                super(props)
+                this.state={
+                        sum:0
+                    }
+            }
+            // 组件将要挂载
+            componentWillMount(){
+                console.log('组件将要挂载','componentWillMount');
+            }
+            // 组件挂载完毕调用
+           componentDidMount(){
+            console.log('挂载完毕','componentDidMount');
+            }
+              // 组件将要卸载
+            componentWillUnmount(){
+                console.log('将要卸载','componentWillUnmount');
+            }
+            // 控制组件是否能更新的阀门
+            shouldComponentUpdate(){
+                console.log('阀门','shouldComponentUpdate');
+                return true
+            }
+            // 组件将要更新
+            componentWillUpdate(){
+                console.log('将要更新','componentWillUpdate');
+            }
+            // 组件已经更新了
+            componentDidUpdate(){
+                console.log('已经更新','componentDidUpdate');
+            }
+            // 初始化，或页面发生更新时调用
+            render() {
+                console.log('render')
+                const {sum}=this.state
+                return (<div>
+                            <h1>当前数据{sum}</h1>
+                            <button onClick={this.handleSum}>点击+1</button>
+                            <button onClick={this.death}>卸载组件</button>
+                            <button onClick={this.force}>不更改状态，强制更新</button>
+                        </div>)
+            }
+            // 点击强制更新
+            force(){
+                this.forceUpdate()                
+            }
+            // 卸载组件
+            death=()=>{
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+            // 求和
+            handleSum=()=>{
+                let {sum}=this.state
+                ++sum
+                this.setState({sum})
+            }
+        }
+        ReactDOM.render(<Count />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>

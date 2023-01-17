@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React生命周期</title>
+    <style>
+        .nameColor {
+            color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <!-- 引入react核心包 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react处理dom文件 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 这里表示里面写的是需要Babel去处理的代码 -->
+    <script type="text/babel">
+      
+        // 定义类式组件
+         class Life extends React.Component {
+            state={
+                opacity:1
+            }
+            // 组件挂载完毕调用
+            componentDidMount(){
+                this.timer=setInterval(()=>{
+                let {opacity}=this.state
+                    opacity-=0.1
+                    if(opacity<=0) opacity=1
+                    this.setState({opacity})
+                },200)
+            }
+              // 组件将要卸载
+            componentWillUnmount(){
+                clearInterval(this.timer)
+            }
+            // 初始化，或页面发生更新时调用
+            render() {
+                return (<div>
+                            <h1 style={{opacity:this.state.opacity}}>React</h1>
+                            <button onClick={this.death}>点击</button>
+                        </div>)
+            }
+          
+            death=()=>{
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+        }
+        ReactDOM.render(<Life />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
