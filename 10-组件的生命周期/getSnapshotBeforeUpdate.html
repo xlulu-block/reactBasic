@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React生命周期</title>
+    <style>
+        .list {
+            height: 150px;
+            background-color: skyblue;
+            width: 200px;
+            overflow: auto;
+        }
+        .list-item{
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <!-- 引入react核心包 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react处理dom文件 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 这里表示里面写的是需要Babel去处理的代码 -->
+    <script type="text/babel">
+      
+        // 定义类式组件
+         class NewsList extends React.Component {
+            state={
+                newArr:[]
+            }
+            componentDidMount(){
+                this.timer=setInterval(()=>{
+                const {newArr}=this.state
+                    console.log(newArr);
+                    const news='新闻'+(newArr.length+1)
+                    this.setState({newArr:[...newArr,news]})
+                },1000)
+            }
+            // 初始化，或页面发生更新时调用
+            render() {
+                console.log('render')
+                const {newArr}=this.state
+                return (<div className='list' ref='list'>
+                            {this.state.newArr.map((item,index)=><div className='list-item' key={index} >{item}</div>)}
+                        </div>)
+            }
+            getSnapshotBeforeUpdate(){
+                return this.refs.list.scrollHeight
+            }
+            componentDidUpdate(prevProps,preState,height){
+                const {newArr}=this.state
+                if(newArr.length>4){
+                    this.refs.list.scrollTop=height
+                }
+            }
+            componentWillUnmount(){
+                clearInterval(this.timer)
+            }
+        }
+       
+
+        ReactDOM.render(<NewsList />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
