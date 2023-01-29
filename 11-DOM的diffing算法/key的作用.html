@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React生命周期</title>
+    <style>
+        .nameColor {
+            color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <!-- 引入react核心包 -->
+    <script src="../js/react17/react.development.js"></script>
+    <!-- 引入react处理dom文件 -->
+    <script src="../js/react17/react-dom.development.js"></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="../js/react17/babel.min.js"></script>
+    <!-- 这里表示里面写的是需要Babel去处理的代码 -->
+    <script type="text/babel">
+
+        // 定义类式组件
+        class VerifyKey extends React.Component {
+            state = {
+                personList: [{ id: 1, name: '张三', age: 10 }, { id: 2, name: '王五', age: 12 }]
+            }
+            addPerson=()=>{
+                const {personList}=this.state
+                const p={id:3,name:'小王',age:1}
+                this.setState({personList:[p,...personList]})
+            }
+            render() {
+
+                const { personList } = this.state
+                return <div>
+                    <button onClick={this.addPerson} >添加一个小王</button>
+                    <ul>
+                        {personList.map((item) => <li key={item.id}>
+                            姓名：{item.name}----年龄：{item.age}
+                        </li>)}
+                    </ul>
+                </div>
+            }
+
+        }
+        ReactDOM.render(<VerifyKey />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
